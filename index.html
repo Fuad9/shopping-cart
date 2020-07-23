@@ -95,6 +95,12 @@
             const addedSubTotal = document.getElementById("currentSubTotal").value;
             const subTotalNumber = parseFloat(addedSubTotal);
 
+            const addedTotal = document.getElementById("currentTotal").value;
+            const totalNumber = parseFloat(addedTotal);
+
+            const addedTax = document.getElementById("currentTax").value;
+            const taxNumber = parseFloat(addedTax);
+
             updatePrice("currentPrice");
             getInputNumber("currentPrice");
 
@@ -103,6 +109,15 @@
 
             updatePrice("currentSubTotal");
             getInputNumber("currentSubTotal");
+
+            updatePrice("currentTotal");
+            getInputNumber("currentTotal");
+
+            updateTax("currentTotal");
+            getInputNumber("currentTotal");
+
+            updateTax("currentTax");
+            getInputNumber("currentTax");
         })
 
 
@@ -126,6 +141,12 @@
             const addedSubTotal = document.getElementById("currentSubTotal").value;
             const subTotalNumber = parseFloat(addedSubTotal);
 
+            const addedTotal = document.getElementById("currentTotal").value;
+            const totalNumber = parseFloat(addedTotal);
+
+            const addedTax = document.getElementById("currentTax").value;
+            const taxNumber = parseFloat(addedTax);
+
             updateCasePrice("caseCurrentPrice");
             getInputNumber("caseCurrentPrice");
 
@@ -134,6 +155,15 @@
 
             updateCasePrice("currentSubTotal");
             getInputNumber("currentSubTotal");
+
+            updateCasePrice("currentTotal");
+            getInputNumber("currentTotal");
+
+            updateTax("currentTotal");
+            getInputNumber("currentTotal");
+
+            updateTax("currentTax");
+            getInputNumber("currentTax");
 
         })
 
@@ -151,6 +181,14 @@
             const currentNumber = parseFloat(current);
             const totalAmount = currentNumber + 1;
             document.getElementById(id).value = totalAmount;
+        }
+
+
+        function updateTax(id) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber + 5;
+            document.getElementById(id).innerText = totalAmount;
         }
 
 
