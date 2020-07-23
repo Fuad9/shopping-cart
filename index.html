@@ -84,7 +84,7 @@
 
     <script>
         document.getElementById("plusBtn").addEventListener("click", function() {
-            const addedQuant = document.getElementById("currentQuant").value;
+            const addedQuant = document.getElementById("currentPrice").value;
             const quantNumber = parseFloat(addedQuant);
 
             updateQuant("currentPrice", quantNumber);
@@ -99,10 +99,10 @@
         }
 
 
-        function updateQuant(id, addedNum) {
+        function updateQuant(id) {
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
-            const totalAmount = addedNum + currentNumber;
+            const totalAmount = currentNumber + 1219;
             document.getElementById(id).innerText = totalAmount;
         }
     </script>
