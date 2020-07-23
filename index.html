@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <button id="caseMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
                                     <input id="caseCurrentQuant" type="text" class="form-control text-center" value="1">
                                     <button id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
@@ -84,6 +84,8 @@
 
     <script>
         // Update Mobile Phone price and quantity
+
+        // Add item to cart
 
         document.getElementById("plusBtn").addEventListener("click", function() {
             const addedPrice = document.getElementById("currentPrice").value;
@@ -129,7 +131,55 @@
         }
 
 
+        // Remove item from cart
+
+        document.getElementById("minusBtn").addEventListener("click", function() {
+            const addedPrice = document.getElementById("currentPrice").value;
+            const priceNumber = parseFloat(addedPrice);
+
+            const addedQuant = document.getElementById("currentQuant").value;
+            const quantNumber = parseFloat(addedQuant);
+
+            const addedSubTotal = document.getElementById("currentSubTotal").value;
+            const subTotalNumber = parseFloat(addedSubTotal);
+
+            const addedTotal = document.getElementById("currentTotal").value;
+            const totalNumber = parseFloat(addedTotal);
+
+            const addedTax = document.getElementById("currentTax").value;
+            const taxNumber = parseFloat(addedTax);
+
+            removePrice("currentPrice");
+            getInputNumber("currentPrice");
+
+            removeQuant("currentQuant");
+            getInputNumber("currentQuant");
+
+            removePrice("currentSubTotal");
+            getInputNumber("currentSubTotal");
+
+            removePrice("currentTotal");
+            getInputNumber("currentTotal");
+
+            removeTax("currentTotal");
+            getInputNumber("currentTotal");
+
+            removeTax("currentTax");
+            getInputNumber("currentTax");
+        })
+
+
+        function removePrice(id) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber - 1219;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
+
         // Update Silicon Case Price and Quantity
+
+        // Add item to cart
 
         document.getElementById("casePlusBtn").addEventListener("click", function() {
             const addedCasePrice = document.getElementById("caseCurrentPrice").value;
@@ -176,10 +226,65 @@
         }
 
 
+        // Remove item from cart
+
+        document.getElementById("caseMinusBtn").addEventListener("click", function() {
+            const addedCasePrice = document.getElementById("caseCurrentPrice").value;
+            const casePriceNumber = parseFloat(addedCasePrice);
+
+            const addedQuant = document.getElementById("caseCurrentQuant").value;
+            const quantNumber = parseFloat(addedQuant);
+
+            const addedSubTotal = document.getElementById("currentSubTotal").value;
+            const subTotalNumber = parseFloat(addedSubTotal);
+
+            const addedTotal = document.getElementById("currentTotal").value;
+            const totalNumber = parseFloat(addedTotal);
+
+            const addedTax = document.getElementById("currentTax").value;
+            const taxNumber = parseFloat(addedTax);
+
+            removeCasePrice("caseCurrentPrice");
+            getInputNumber("caseCurrentPrice");
+
+            removeQuant("caseCurrentQuant");
+            getInputNumber("caseCurrentQuant");
+
+            removeCasePrice("currentSubTotal");
+            getInputNumber("currentSubTotal");
+
+            removeCasePrice("currentTotal");
+            getInputNumber("currentTotal");
+
+            removeTax("currentTotal");
+            getInputNumber("currentTotal");
+
+            removeTax("currentTax");
+            getInputNumber("currentTax");
+
+        })
+
+
+        function removeCasePrice(id) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber - 59;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
+
         function updateQuant(id) {
             const current = document.getElementById(id).value;
             const currentNumber = parseFloat(current);
             const totalAmount = currentNumber + 1;
+            document.getElementById(id).value = totalAmount;
+        }
+
+
+        function removeQuant(id) {
+            const current = document.getElementById(id).value;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber - 1;
             document.getElementById(id).value = totalAmount;
         }
 
@@ -190,6 +295,15 @@
             const totalAmount = currentNumber + 5;
             document.getElementById(id).innerText = totalAmount;
         }
+
+
+        function removeTax(id) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber - 5;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
 
 
         function getInputNumber(id) {
