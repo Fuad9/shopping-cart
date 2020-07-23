@@ -29,7 +29,7 @@
                                     <input id="currentQuant" type="text" class="form-control text-center" value="1">
                                     <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
-                                <h5>$ <span id="currentPrice">1219</span></h5>
+                                <h5>$<span id="currentPrice">1219</span></h5>
                                 <img src="images/remove.png" alt="" class="remove-item">
                             </div>
                         </div>
@@ -46,13 +46,13 @@
                                     <button class="btn btn-default"><i class="fas fa-minus"></i></button>
                                     <input id="caseCurrentQuant" type="text" class="form-control text-center" value="1">
                                     <button id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
-
                                 </div>
-                                <h5>$ <span id="caseCurrentPrice">59</span></h5>
+                                <h5>$<span id="caseCurrentPrice">59</span></h5>
                                 <img src="images/remove.png" alt="" class="remove-item">
                             </div>
                         </div>
                     </div>
+
 
                     <div class="cart-item">
                         <div class="row">
@@ -64,9 +64,9 @@
                             </div>
 
                             <div class="col-md-4 status">
-                                <h5>$1,278</h5>
-                                <h5>$0</h5>
-                                <h5>$1,278</h5>
+                                <h5>$<span id="currentSubTotal">1278</span></h5>
+                                <h5>$<span id="currentTax">0</span></h5>
+                                <h5>$<span id="currentTotal">1278</span></h5>
                             </div>
                         </div>
                     </div>
@@ -92,11 +92,17 @@
             const addedQuant = document.getElementById("currentQuant").value;
             const quantNumber = parseFloat(addedQuant);
 
+            const addedSubTotal = document.getElementById("currentSubTotal").value;
+            const subTotalNumber = parseFloat(addedSubTotal);
+
             updatePrice("currentPrice");
             getInputNumber("currentPrice");
 
             updateQuant("currentQuant");
             getInputNumber("currentQuant");
+
+            updatePrice("currentSubTotal");
+            getInputNumber("currentSubTotal");
         })
 
 
@@ -117,11 +123,17 @@
             const addedQuant = document.getElementById("caseCurrentQuant").value;
             const quantNumber = parseFloat(addedQuant);
 
+            const addedSubTotal = document.getElementById("currentSubTotal").value;
+            const subTotalNumber = parseFloat(addedSubTotal);
+
             updateCasePrice("caseCurrentPrice");
             getInputNumber("caseCurrentPrice");
 
             updateQuant("caseCurrentQuant");
             getInputNumber("caseCurrentQuant");
+
+            updateCasePrice("currentSubTotal");
+            getInputNumber("currentSubTotal");
 
         })
 
