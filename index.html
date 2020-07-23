@@ -25,11 +25,11 @@
 
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control text-center" value="1">
-                                    <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    <button id="minusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input id="currentQuant" type="text" class="form-control text-center" value="1">
+                                    <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
-                                <h5>$1219</h5>
+                                <h5>$ <span id="currentPrice">1219</span></h5>
                                 <img src="images/remove.png" alt="" class="remove-item">
                             </div>
                         </div>
@@ -77,6 +77,35 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+    <script>
+        document.getElementById("plusBtn").addEventListener("click", function() {
+            const addedQuant = document.getElementById("currentQuant").value;
+            const quantNumber = parseFloat(addedQuant);
+
+            updateQuant("currentPrice", quantNumber);
+            getInputNumber("currentPrice");
+
+        })
+
+        function getInputNumber(id) {
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+
+        function updateQuant(id, addedNum) {
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = addedNum + currentNumber;
+            document.getElementById(id).innerText = totalAmount;
+        }
+    </script>
 </body>
 
 </html>
