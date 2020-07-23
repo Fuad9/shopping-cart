@@ -26,8 +26,7 @@
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
                                     <button id="minusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <!-- <input id="currentQuant" type="text" class="form-control text-center" value="1"> -->
-                                    <h5 id="currentQuant">1</h5>
+                                    <input id="currentQuant" type="text" class="form-control text-center" value="1">
                                     <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <h5>$ <span id="currentPrice">1219</span></h5>
@@ -45,7 +44,7 @@
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
                                     <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input type="text" class="form-control text-center" value="1">
+                                    <input id="caseCurrentQuant" type="text" class="form-control text-center" value="1">
                                     <button id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                                 </div>
@@ -108,12 +107,6 @@
             document.getElementById(id).innerText = totalAmount;
         }
 
-        function updateQuant(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber + 1;
-            document.getElementById(id).innerText = totalAmount;
-        }
 
         // Update Silicon Case Price and Quantity
 
@@ -121,8 +114,14 @@
             const addedCasePrice = document.getElementById("caseCurrentPrice").value;
             const casePriceNumber = parseFloat(addedCasePrice);
 
-            updateCasePrice("caseCurrentPrice", casePriceNumber);
+            const addedQuant = document.getElementById("caseCurrentQuant").value;
+            const quantNumber = parseFloat(addedQuant);
+
+            updateCasePrice("caseCurrentPrice");
             getInputNumber("caseCurrentPrice");
+
+            updateQuant("caseCurrentQuant");
+            getInputNumber("caseCurrentQuant");
 
         })
 
@@ -132,6 +131,14 @@
             const currentNumber = parseFloat(current);
             const totalAmount = currentNumber + 59;
             document.getElementById(id).innerText = totalAmount;
+        }
+
+
+        function updateQuant(id) {
+            const current = document.getElementById(id).value;
+            const currentNumber = parseFloat(current);
+            const totalAmount = currentNumber + 1;
+            document.getElementById(id).value = totalAmount;
         }
 
 
