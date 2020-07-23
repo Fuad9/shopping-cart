@@ -16,7 +16,7 @@
         <div class="container">
             <div class="cart">
                 <div class="col-md-12 col-lg-10 mx-auto">
-                    <div class="cart-item">
+                    <div id="phone" class="cart-item">
                         <div class="row">
                             <div class="col-md-7 center-item">
                                 <img src="images/product-1.png" alt="">
@@ -30,12 +30,12 @@
                                     <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <h5>$<span id="currentPrice">1219</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+                                <button id="removePhone" class="btn btn-default"><img src="images/remove.png" alt="" class="remove-item"></button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="cart-item">
+                    <div id="case" class="cart-item">
                         <div class="row">
                             <div class="col-md-7 center-item mx-auto">
                                 <img src="images/product-2.png" alt="">
@@ -48,7 +48,7 @@
                                     <button id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <h5>$<span id="caseCurrentPrice">59</span></h5>
-                                <img src="images/remove.png" alt="" class="remove-item">
+                                <button id="removeCase" class="btn btn-default"><img src="images/remove.png" alt="" class="remove-item"></button>
                             </div>
                         </div>
                     </div>
@@ -305,11 +305,22 @@
         }
 
 
-
         function getInputNumber(id) {
             const amount = document.getElementById(id).value;
             const amountNumber = parseFloat(amount);
             return amountNumber;
+        }
+
+        document.getElementById("removePhone").addEventListener("click", function() {
+            removeItem("phone");
+        })
+
+        document.getElementById("removeCase").addEventListener("click", function() {
+            removeItem("case");
+        })
+
+        function removeItem(id) {
+            document.getElementById(id).style.display = "none";
         }
     </script>
 </body>
