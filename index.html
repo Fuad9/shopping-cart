@@ -65,8 +65,8 @@
 
                             <div class="col-md-4 status">
                                 <h5>$<span id="currentSubTotal">1278</span></h5>
-                                <h5>$<span id="currentTax">0</span></h5>
-                                <h5>$<span id="currentTotal">1278</span></h5>
+                                <h5>$<span id="currentTax">10</span></h5>
+                                <h5>$<span id="currentTotal">1288</span></h5>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
         }
 
 
-        // Remove item from cart
+        // Remove item from cart and minus button event handler
 
         document.getElementById("caseMinusBtn").addEventListener("click", function() {
             const addedCasePrice = document.getElementById("caseCurrentPrice").value;
