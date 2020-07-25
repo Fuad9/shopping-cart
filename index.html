@@ -25,11 +25,11 @@
 
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button id="minusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input id="currentQuant" type="text" class="form-control text-center" value="1">
-                                    <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    <button onclick="updateProduct('phone', false)" id="minusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input id="phoneQuant" type="text" class="form-control text-center" value="1">
+                                    <button onclick="updateProduct('phone', true)" id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
-                                <h5>$<span id="currentPrice">1219</span></h5>
+                                <h5>$<span id="phonePrice">1219</span></h5>
                                 <button id="removePhone" class="btn btn-default"><img src="images/remove.png" alt="" class="remove-item"></button>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
                             </div>
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button id="caseMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                                    <input id="caseCurrentQuant" type="text" class="form-control text-center" value="1">
-                                    <button id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    <button onclick="updateProduct('case', false)" id="caseMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input id="caseQuant" type="text" class="form-control text-center" value="1">
+                                    <button onclick="updateProduct('case', true)" id="casePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
-                                <h5>$<span id="caseCurrentPrice">59</span></h5>
+                                <h5>$<span id="casePrice">59</span></h5>
                                 <button id="removeCase" class="btn btn-default"><img src="images/remove.png" alt="" class="remove-item"></button>
                             </div>
                         </div>
@@ -64,9 +64,9 @@
                             </div>
 
                             <div class="col-md-4 status">
-                                <h5>$<span id="currentSubTotal">1278</span></h5>
-                                <h5>$<span id="currentTax">10</span></h5>
-                                <h5>$<span id="currentTotal">1288</span></h5>
+                                <h5>$<span id="subTotal">1278</span></h5>
+                                <h5>$<span id="tax">00</span></h5>
+                                <h5>$<span id="grandTotal">1278</span></h5>
                             </div>
                         </div>
                     </div>
@@ -83,232 +83,45 @@
 
 
     <script>
-        // Update Mobile Phone price and quantity
-
-        // Add item to cart
-
-        document.getElementById("plusBtn").addEventListener("click", function() {
-            const addedPrice = document.getElementById("currentPrice").value;
-            const priceNumber = parseFloat(addedPrice);
-
-            const addedQuant = document.getElementById("currentQuant").value;
-            const quantNumber = parseFloat(addedQuant);
-
-            const addedSubTotal = document.getElementById("currentSubTotal").value;
-            const subTotalNumber = parseFloat(addedSubTotal);
-
-            const addedTotal = document.getElementById("currentTotal").value;
-            const totalNumber = parseFloat(addedTotal);
-
-            const addedTax = document.getElementById("currentTax").value;
-            const taxNumber = parseFloat(addedTax);
-
-            updatePrice("currentPrice");
-            getInputNumber("currentPrice");
-
-            updateQuant("currentQuant");
-            getInputNumber("currentQuant");
-
-            updatePrice("currentSubTotal");
-            getInputNumber("currentSubTotal");
-
-            updatePrice("currentTotal");
-            getInputNumber("currentTotal");
-
-            updateTax("currentTotal");
-            getInputNumber("currentTotal");
-
-            updateTax("currentTax");
-            getInputNumber("currentTax");
-        })
-
-
-        function updatePrice(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber + 1219;
-            document.getElementById(id).innerText = totalAmount;
+        function updateProduct(product, isIncrease) {
+            const productInput = document.getElementById(product + "Quant");
+            const productCount = parseInt(productInput.value);
+            let totalAmount = productCount;
+            if (isIncrease == true) {
+                totalAmount = productCount + 1;
+            }
+            if (isIncrease == false && productCount > 0) {
+                totalAmount = productCount - 1;
+            }
+            productInput.value = totalAmount;
+            if (product == "phone") {
+                document.getElementById(product + "Price").innerText = totalAmount * 1219;
+            }
+            if (product == "case") {
+                document.getElementById(product + "Price").innerText = totalAmount * 59;
+            }
+            calculateTotalPrice();
         }
 
 
-        // Remove item from cart
+        function calculateTotalPrice() {
+            const phoneCount = getInputNumber("phone");
+            const caseCount = getInputNumber("case");
 
-        document.getElementById("minusBtn").addEventListener("click", function() {
-            const addedPrice = document.getElementById("currentPrice").value;
-            const priceNumber = parseFloat(addedPrice);
+            const totalPrice = phoneCount * 1219 + caseCount * 59;
+            document.getElementById("subTotal").innerText = totalPrice;
 
-            const addedQuant = document.getElementById("currentQuant").value;
-            const quantNumber = parseFloat(addedQuant);
+            const totalTax = Math.round(totalPrice * 0.1);
+            document.getElementById("tax").innerText = totalTax;
 
-            const addedSubTotal = document.getElementById("currentSubTotal").value;
-            const subTotalNumber = parseFloat(addedSubTotal);
-
-            const addedTotal = document.getElementById("currentTotal").value;
-            const totalNumber = parseFloat(addedTotal);
-
-            const addedTax = document.getElementById("currentTax").value;
-            const taxNumber = parseFloat(addedTax);
-
-            removePrice("currentPrice");
-            getInputNumber("currentPrice");
-
-            removeQuant("currentQuant");
-            getInputNumber("currentQuant");
-
-            removePrice("currentSubTotal");
-            getInputNumber("currentSubTotal");
-
-            removePrice("currentTotal");
-            getInputNumber("currentTotal");
-
-            removeTax("currentTotal");
-            getInputNumber("currentTotal");
-
-            removeTax("currentTax");
-            getInputNumber("currentTax");
-        })
-
-
-        function removePrice(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber - 1219;
-            document.getElementById(id).innerText = totalAmount;
+            const grandTotal = totalPrice + totalTax;
+            document.getElementById("grandTotal").innerText = grandTotal;
         }
 
-
-        // Update Silicon Case Price and Quantity
-
-        // Add item to cart
-
-        document.getElementById("casePlusBtn").addEventListener("click", function() {
-            const addedCasePrice = document.getElementById("caseCurrentPrice").value;
-            const casePriceNumber = parseFloat(addedCasePrice);
-
-            const addedQuant = document.getElementById("caseCurrentQuant").value;
-            const quantNumber = parseFloat(addedQuant);
-
-            const addedSubTotal = document.getElementById("currentSubTotal").value;
-            const subTotalNumber = parseFloat(addedSubTotal);
-
-            const addedTotal = document.getElementById("currentTotal").value;
-            const totalNumber = parseFloat(addedTotal);
-
-            const addedTax = document.getElementById("currentTax").value;
-            const taxNumber = parseFloat(addedTax);
-
-            updateCasePrice("caseCurrentPrice");
-            getInputNumber("caseCurrentPrice");
-
-            updateQuant("caseCurrentQuant");
-            getInputNumber("caseCurrentQuant");
-
-            updateCasePrice("currentSubTotal");
-            getInputNumber("currentSubTotal");
-
-            updateCasePrice("currentTotal");
-            getInputNumber("currentTotal");
-
-            updateTax("currentTotal");
-            getInputNumber("currentTotal");
-
-            updateTax("currentTax");
-            getInputNumber("currentTax");
-
-        })
-
-
-        function updateCasePrice(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber + 59;
-            document.getElementById(id).innerText = totalAmount;
-        }
-
-
-        // Remove item from cart and minus button event handler
-
-        document.getElementById("caseMinusBtn").addEventListener("click", function() {
-            const addedCasePrice = document.getElementById("caseCurrentPrice").value;
-            const casePriceNumber = parseFloat(addedCasePrice);
-
-            const addedQuant = document.getElementById("caseCurrentQuant").value;
-            const quantNumber = parseFloat(addedQuant);
-
-            const addedSubTotal = document.getElementById("currentSubTotal").value;
-            const subTotalNumber = parseFloat(addedSubTotal);
-
-            const addedTotal = document.getElementById("currentTotal").value;
-            const totalNumber = parseFloat(addedTotal);
-
-            const addedTax = document.getElementById("currentTax").value;
-            const taxNumber = parseFloat(addedTax);
-
-            removeCasePrice("caseCurrentPrice");
-            getInputNumber("caseCurrentPrice");
-
-            removeQuant("caseCurrentQuant");
-            getInputNumber("caseCurrentQuant");
-
-            removeCasePrice("currentSubTotal");
-            getInputNumber("currentSubTotal");
-
-            removeCasePrice("currentTotal");
-            getInputNumber("currentTotal");
-
-            removeTax("currentTotal");
-            getInputNumber("currentTotal");
-
-            removeTax("currentTax");
-            getInputNumber("currentTax");
-
-        })
-
-
-        function removeCasePrice(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber - 59;
-            document.getElementById(id).innerText = totalAmount;
-        }
-
-
-        function updateQuant(id) {
-            const current = document.getElementById(id).value;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber + 1;
-            document.getElementById(id).value = totalAmount;
-        }
-
-
-        function removeQuant(id) {
-            const current = document.getElementById(id).value;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber - 1;
-            document.getElementById(id).value = totalAmount;
-        }
-
-
-        function updateTax(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber + 5;
-            document.getElementById(id).innerText = totalAmount;
-        }
-
-
-        function removeTax(id) {
-            const current = document.getElementById(id).innerText;
-            const currentNumber = parseFloat(current);
-            const totalAmount = currentNumber - 5;
-            document.getElementById(id).innerText = totalAmount;
-        }
-
-
-        function getInputNumber(id) {
-            const amount = document.getElementById(id).value;
-            const amountNumber = parseFloat(amount);
-            return amountNumber;
+        function getInputNumber(product) {
+            const productInput = document.getElementById(product + "Quant")
+            const productCount = parseInt(productInput.value);
+            return productCount;
         }
 
         document.getElementById("removePhone").addEventListener("click", function() {
